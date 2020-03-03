@@ -7,16 +7,14 @@ struct Node {
     struct Node *next;
 };
 
-void addNode(struct Node *head, int data, unsigned int size) {
+struct Node *head = NULL;
+
+struct Node *addFirst() {
     struct Node *temp = (struct Node *)malloc(sizeof(struct Node));
-    struct Node *ptr = (struct Node *)malloc(sizeof(struct Node));
-    ptr = head;
-    temp->data = data;
-    for (int i = 0; i < size; i++) {
-        ptr->next = temp;
-        ptr = ptr->next;
-    }
-    display(head, size);
+    temp->data = rand() % 10;
+    temp->next = head;
+    head = temp;
+    return head;
 }
 
 void display(struct Node *head, unsigned int size) {
@@ -24,11 +22,27 @@ void display(struct Node *head, unsigned int size) {
         printf("%d ", (head->data));
         head = head->next;
     }
+    printf("\n");
+}
+
+void insert(struct Node *head, unsigned int size) {
+    struct Node *ptr = head;
+    for (int i = 0; i < size; i++) {
+        if ((ptr->data) % 2 != 0) {
+            
+        }
+    }
 }
 
 int main(){
+    unsigned int size;
     srand((int)time(0));
+    printf("Enter size: ");
+    scanf("%d", &size);
     struct Node *head = (struct Node *)malloc(sizeof(struct Node));
-    addNode(head, 120, 5);
+    for(int i = 0; i < size; i++) {
+        head = addFirst();
+    }
+    display(head, size);
     return 0;
 }

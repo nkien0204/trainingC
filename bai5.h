@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<time.h>
 
-void input(double **matrix, unsigned size);
+double **input(double **matrix, unsigned size);
 void print(double **matrix, unsigned size);
-void mult(const double *matrix1, const double *matrix2, double **output, unsigned size);
-void add(const double *matrix1, const double *matrix2, double **output, unsigned size);
+double **mult(double **matrix1, double **matrix2, double **output, unsigned size);
+double **add(double **matrix1, double **matrix2, double **output, unsigned size);
