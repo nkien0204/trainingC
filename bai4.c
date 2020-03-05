@@ -4,17 +4,16 @@
 
 int **inputMatrix(int **matrix, unsigned int row, unsigned int column);
 FILE *exportFile(FILE *ptr, char *destination, char *mode, int **content, unsigned int row, unsigned int column);
-int **maxMin(int **matrixNew, int **matrix, unsigned int N);
+int **maxMin(int **matrixNew, unsigned int N);
 
 int main(){
     FILE *ptr = NULL;
-    int **matrix = NULL, **matrixNew = NULL;
+    int **matrix = NULL;
     int N;
     srand((int)time(0));
     printf("Enter N: ");
     scanf("%d", &N);
     matrix = inputMatrix(matrix, N, N);
-    matrixNew = inputMatrix(matrix, N + 2, N);
 
     ptr = exportFile(ptr, "/home/kn/vsCode/trainingC/bai4.txt", "w", matrix, N, N);
 
@@ -22,19 +21,19 @@ int main(){
     fprintf(ptr, "%s", "\n\n");
     fclose(ptr);
 
-    matrixNew = maxMin(matrixNew, matrix, N);
-    
-    for (int i = 0; i < N; i++) {
+    matrix = (int **)realloc(matrix, (N + 2) * sizeof(int*));
+    for (int i = 0; i < N + 2; i++) {
+        matrix[i] = (int *)realloc(matrix[i], N * sizeof(int));
+    }
+
+    matrix = maxMin(matrix, N);
+
+    ptr = exportFile(ptr, "/home/kn/vsCode/trainingC/bai4.txt", "a", matrix, N + 2, N);
+
+    for (int i = 0; i < N + 2; i++) {
         free(matrix[i]);
     }
     free(matrix);
-
-    ptr = exportFile(ptr, "/home/kn/vsCode/trainingC/bai4.txt", "a", matrixNew, N + 2, N);
-
-    for (int i = 0; i < N + 2; i++) {
-        free(matrixNew[i]);
-    }
-    free(matrixNew);
 
     return 0;
 }
@@ -72,14 +71,8 @@ FILE *exportFile(FILE *ptr, char *destination, char *mode, int **content, unsign
     return ptr;
 }
 
-int **maxMin(int **matrixNew, int **matrix, unsigned int N) {
+int **maxMin(int **matrixNew, unsigned int N) {
     int min, max;
-    for (int i = 0; i < N; i++) {
-        for (int j = 0; j < N; j++) {
-            matrixNew[i][j] = matrix[i][j];
-        }
-    }
-
     for (int i = 0; i < N; i++) {
         min = matrixNew[0][i];
         max = matrixNew[0][i];

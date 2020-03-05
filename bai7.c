@@ -9,8 +9,6 @@ struct Node {
 
 typedef struct Node *node;
 
-node head = NULL;
-
 node createNode() {
     node temp = (node)malloc(sizeof(struct Node));
     temp->data = rand() % 100;
@@ -24,7 +22,7 @@ node pushBack(node head) {
     if (head == NULL) {
         head = temp;
     } else {
-        node ptr = head;
+        ptr = head;
         while (ptr->next != NULL) {
             ptr = ptr->next;
         }
@@ -57,29 +55,31 @@ node mission(node head) {
     node ptr = head;
     node temp;
     int i = 0;
-    while (ptr != NULL) {
-        if ((ptr->data) % 2 != 0) {
+    for (ptr; ptr != NULL; ptr = ptr->next) {
+        if (ptr->data % 2 != 0) {
             addPosition(head, i + 1);
-            temp->data = (ptr->data) * (ptr->data);
-            printf("temp data: %d ", temp->data);
+            ptr->next->data = (ptr->data) * (ptr->data);
             ptr = ptr->next;
+            i++;
         }
         i++;
-        ptr = ptr->next;
     }
-    printf("\n");
+    //printf("\n");
     return head;
 }
 
 void display(node head) {
     node ptr = head;
+    int i = 0;
     for (ptr; ptr != NULL; ptr = ptr->next) {
         printf("%d ", (ptr->data));
+        i++;
     }
     printf("\n");
 }
 
 int main() {
+    node head = NULL;
     unsigned int size;
     srand((int)time(0));
     printf("Enter size: ");
@@ -88,9 +88,11 @@ int main() {
         head = pushBack(head);
     }
     display(head);
-    head = mission(head);
+    mission(head);
     //addPosition(head, 5);
     display(head);
-    free(head);
+    for (node ptr = head; ptr != NULL; ptr = ptr->next) {
+        free(ptr);
+    }
     return 0;
 }

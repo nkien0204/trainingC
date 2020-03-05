@@ -1,15 +1,14 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
 
-int **as(int **a, int N) {
-    a = (int **)malloc(N * sizeof(int *));
-    for (int i = 0; i < N; i++) {
-        a[i] = (int *)malloc(N * sizeof(int));
-    }
-}
+int main()
+{
+   FILE *fp;
+   char buff[255];
 
-int main() {
-    int **a;
-    a = as(a, 3);
-    return 0;
+   fp = fopen("/home/kn/vsCode/trainingC/vidu.txt", "r");
+   fgets(buff, 255, fp);
+   printf("%s", buff);
+   fgets(buff, 255, fp);
+   printf("%s", buff);
+   fclose(fp);
 }
