@@ -1,3 +1,4 @@
-for (int i = 0; i < capacity; i++){
-    //     free(array[i]);
-    // }
+for (int i = 0; i < N + 2; i++) {
+        free(matrixNew[i]);
+    }
+    free(matrixNew);
