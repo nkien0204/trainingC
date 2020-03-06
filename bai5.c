@@ -2,10 +2,10 @@
 #include<stdlib.h>
 #include<time.h>
 
-double **input(double **matrix, unsigned size);
+void input(double ***matrix, unsigned size);
 void print(double **matrix, unsigned size);
-double **mult(double **matrix1, double **matrix2, double **output, unsigned size);
-double **add(double **matrix1, double **matrix2, double **output, unsigned size);
+void mult(double **matrix1, double **matrix2, double ***output, unsigned size);
+void add(double **matrix1, double **matrix2, double ***output, unsigned size);
 
 int main() {
     srand((int)time(0));
@@ -24,18 +24,18 @@ int main() {
         multMatrix[i] = (double *)malloc(size * sizeof(double));
     }
 
-    matrix1 = input(matrix1, size);
-    matrix2 = input(matrix2, size);
+    input(&matrix1, size);
+    input(&matrix2, size);
     print(matrix1, size);
     printf("\n");
     print(matrix2, size);
 
     printf("\nMatrix1 + Matrix2: \n");
-    addMatrix = add(matrix1, matrix2, addMatrix, size);
+    add(matrix1, matrix2, &addMatrix, size);
     print(addMatrix, size);
     printf("\n");
     printf("Matrix1 * Matrix2: \n");
-    multMatrix = mult(matrix1, matrix2, multMatrix, size);
+    mult(matrix1, matrix2, &multMatrix, size);
     print(multMatrix, size);
     printf("\n");
 
@@ -52,13 +52,12 @@ int main() {
     return 0;
 }
 
-double **input(double **matrix, unsigned int size) {
+void input(double ***matrix, unsigned int size) {
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
-            matrix[i][j] = rand() % 10;
+            (*matrix)[i][j] = rand() % 10;
         }
     }
-    return matrix;
 }
 
 void print(double **matrix, unsigned size) {
@@ -70,30 +69,26 @@ void print(double **matrix, unsigned size) {
     }
 }
 
-double **mult(double **matrix1, double **matrix2, double **output, unsigned size) {
+void mult(double **matrix1, double **matrix2, double ***output, unsigned size) {
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
-            output[i][j] = 0;
+            (*output)[i][j] = 0;
         }
     }
 
     for (int z = 0; z < size; z++) {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                output[i][z] = output[i][z] + matrix1[i][j] * matrix2[j][z];
+                (*output)[i][z] = (*output)[i][z] + matrix1[i][j] * matrix2[j][z];
             }
         }
     }
-
-    return output;
 }
 
-double **add(double **matrix1, double **matrix2, double **output, unsigned size) {
+void add(double **matrix1, double **matrix2, double ***output, unsigned size) {
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
-            output[i][j] = matrix1[i][j] + matrix2[i][j];
+            (*output)[i][j] = matrix1[i][j] + matrix2[i][j];
         }
     }
-    
-    return output;
 }
