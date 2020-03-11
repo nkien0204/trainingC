@@ -1,10 +1,3 @@
-CC=gcc
-CFLAGS=-I
-DEPS = proj.h
-
-%.o: %.c $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
-
 build: main.o bai1.o bai3.o bai4.o bai5.o bai6.o bai7.o bai8.o bai9.o bai10.o
 	gcc -o build main.o bai1.o bai3.o bai4.o bai5.o bai6.o bai7.o bai8.o bai9.o bai10.o -lm
 main.o: main.c proj.h
