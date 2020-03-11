@@ -1,18 +1,11 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
+#include"proj.h"
 
-void readNames(char *names[], const int size);
-void writeNames(char *names[], const int size);
-void bubbleSort(char *names[], const int size);
-void swap(char **name1, char **name2);
-
-int main() {
-    char *name[5];
-    writeNames(name, 5);
-    return 0;
+void bai6() {
+    int num;
+    printf("Enter number of people: ");
+    scanf("%d", &num);
+    writeNames(num);
 }
-
 void readNames(char *names[], const int size) {
     for (int i = 0; i < size; i++) {
         printf("%s ", names[i]);
@@ -20,7 +13,8 @@ void readNames(char *names[], const int size) {
     printf("\n");
 }
 
-void writeNames(char *names[], const int size) {
+void writeNames(const int size) {
+    char **names;
     names = (char **)malloc(size * sizeof(char *));
     for (int i = 0; i < size; i++) {
         names[i] = (char *)malloc(size * sizeof(char));
@@ -31,6 +25,10 @@ void writeNames(char *names[], const int size) {
     }
     bubbleSort(names, size);
     readNames(names, size);
+    for (int i = 0; i < size; i++) {
+        free(names[i]);
+    }
+    free(names);
 }
 
 void bubbleSort(char *names[], const int size) {

@@ -1,9 +1,9 @@
-#include<stdlib.h>
-#include<stdio.h>
-#include<math.h>
+#include"proj.h"
 
-int main(){
-    int decima = 55;
+void bai3(){
+    int decima;
+    printf("Enter decimal number: ");
+    scanf("%d", &decima);
     int re, capacity = 0, i = 1;
     int *array;
     if (decima <= 255) {

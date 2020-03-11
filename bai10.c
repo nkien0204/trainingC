@@ -1,42 +1,10 @@
-#include<stdlib.h>
-#include<stdio.h>
-#include<string.h>
-#include<stdbool.h>
+#include"proj.h"
 
-typedef struct Node {
-    float data;
-    struct Node *next, *left, *right;
-} *node;
-
-node createNode(float data);
-void pushBack(node *head, float data);
-void strFloat(float *result, const char *str);
-void display(node d_head);
-void insertBST(node *root, float data);
-bool leftOf(node l_root, float l_data);
-bool rightOf(node r_root, float r_data);
-void preOrder(node p_root);
-void inOrder(node i_root);
-void postOrder(node p_root);
-bool search(node s_root, float value);
-float leftMostNode(node l_root);
-void delete(node *d_root, float value);
-void Free(node root)
-{
-    if (root == NULL )
-        return;
-    else {
-        Free(root->left );
-        Free(root->right );
-        free(root );
-    }
-}
-
-int main() {
+void bai10() {
     int N;
     char *endPoint;
-    node head = NULL;
-    node root = NULL;
+    node10 head = NULL;
+    node10 root = NULL;
     printf("Enter N: ");
     scanf("%d", &N);
     float *buff = (float *)malloc(N * sizeof(float));
@@ -47,10 +15,10 @@ int main() {
     for (int i = 0; i < N; i++) {
         fgets(chBuff, 255, fptr);
         printf("%s", chBuff);
-        pushBack(&head, strtof(chBuff, &endPoint));
+        pushBack10(&head, strtof(chBuff, &endPoint));
     }
-    display(head);
-    for (node ptr = head; ptr != NULL; ptr = ptr->next) {
+    display10(head);
+    for (node10 ptr = head; ptr != NULL; ptr = ptr->next) {
         insertBST(&root, (ptr->data));
     }
     printf("\nPreOrder: ");
@@ -65,18 +33,17 @@ int main() {
     printf("\n");
     Free(root);
     free(head);
-    return 0;
 }
 
-node createNode(float data) {
-    node temp = (node)malloc(sizeof(struct Node));
+node10 createNode10(float data) {
+    node10 temp = (node10)malloc(sizeof(struct Node10));
     temp->next = NULL;
     temp->data = data;
     return temp;
 }
 
-void pushBack(node *head, float data) {
-    node ptr, temp = createNode(data);
+void pushBack10(node10 *head, float data) {
+    node10 ptr, temp = createNode10(data);
     if (*head == NULL) {
         *head = temp;
     } else {
@@ -88,18 +55,18 @@ void pushBack(node *head, float data) {
     }
 }
 
-void display(node d_head) {
+void display10(node10 d_head) {
     printf("Linked list: ");
-    node ptr = d_head;
+    node10 ptr = d_head;
     for (ptr; ptr != NULL; ptr = ptr->next) {
         printf("%.4f ", ptr->data);
     }
     printf("\n");
 }
 
-void insertBST(node *head, float i_data) {
+void insertBST(node10 *head, float i_data) {
     if (*head == NULL) {
-        node temp = (node)malloc(sizeof(struct Node));
+        node10 temp = (node10)malloc(sizeof(struct Node10));
         (temp)->data = i_data;
         (temp)->left = NULL;
         (temp)->right = NULL;
@@ -111,15 +78,15 @@ void insertBST(node *head, float i_data) {
     }
 }
 
-bool leftOf(node l_root, float l_data) {
+bool leftOf(node10 l_root, float l_data) {
     return l_data < (l_root->data);
 }
 
-bool rightOf(node r_root, float r_data) {
+bool rightOf(node10 r_root, float r_data) {
     return r_data > (r_root->data);
 }
 
-void preOrder(node p_root) {
+void preOrder(node10 p_root) {
     if (p_root != NULL) {
         printf("%.4f ", p_root->data);
         preOrder(p_root->left);
@@ -127,7 +94,7 @@ void preOrder(node p_root) {
     }
 }
 
-void inOrder(node p_root) {
+void inOrder(node10 p_root) {
     if (p_root != NULL) {
         inOrder(p_root->left);
         printf("%.4f ", p_root->data);
@@ -135,7 +102,7 @@ void inOrder(node p_root) {
     }
 }
 
-void postOrder(node p_root) {
+void postOrder(node10 p_root) {
     if (p_root != NULL) {
         postOrder(p_root->left);
         postOrder(p_root->right);
@@ -143,7 +110,7 @@ void postOrder(node p_root) {
     }
 }
 
-bool search(node s_root, float value) {
+bool search(node10 s_root, float value) {
     if (s_root == NULL) {
         return false;
     } else if (s_root->data == value) {
@@ -155,13 +122,13 @@ bool search(node s_root, float value) {
     }
 }
 
-float leftMostNode(node l_root) {
-    node ptr;
+float leftMostNode(node10 l_root) {
+    node10 ptr;
     for (ptr = l_root; ptr->next != NULL; ptr = ptr->left);
     return ptr->data;
 }
 
-void delete(node *d_root, float value) {
+void delete(node10 *d_root, float value) {
     if (*d_root == NULL) {
         printf("NULL\n");
     } else if (leftOf(*d_root, value)) {
@@ -170,13 +137,13 @@ void delete(node *d_root, float value) {
         delete(&((*d_root)->right), value);
     } else {
         if ((*d_root)->left == NULL) {
-            node newNode = (*d_root)->right;
+            node10 newNode = (*d_root)->right;
             free(*d_root);
             *d_root = newNode;
             return;
         }
         if ((*d_root)->right == NULL) {
-            node newNode = (*d_root)->right;
+            node10 newNode = (*d_root)->right;
             free(*d_root);
             *d_root = newNode;
             return;
@@ -184,5 +151,15 @@ void delete(node *d_root, float value) {
         (*d_root)->data = leftMostNode((*d_root)->right);
 
         delete(&((*d_root)->right), ((*d_root)->data));
+    }
+}
+
+void Free(node10 root) {
+    if (root == NULL )
+        return;
+    else {
+        Free(root->left);
+        Free(root->right);
+        free(root);
     }
 }

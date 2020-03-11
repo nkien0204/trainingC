@@ -1,14 +1,6 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<time.h>
+#include"proj.h"
 
-void input(double ***matrix, unsigned size);
-void print(double **matrix, unsigned size);
-void mult(double **matrix1, double **matrix2, double ***output, unsigned size);
-void add(double **matrix1, double **matrix2, double ***output, unsigned size);
-
-int main() {
-    srand((int)time(0));
+void bai5() {
     unsigned int size;
     printf("Enter size: ");
     scanf("%d", &size);
@@ -49,7 +41,6 @@ int main() {
     free(matrix2);
     free(addMatrix);
     free(multMatrix);
-    return 0;
 }
 
 void input(double ***matrix, unsigned int size) {

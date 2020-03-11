@@ -1,7 +1,6 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include"proj.h"
 
-int main() {
+void bai1() {
     int N;
     printf("Enter N: ");
     scanf("%d", &N);

@@ -1,24 +1,15 @@
-#include<stdio.h>
-#include<time.h>
-#include<stdlib.h>
+#include"proj.h"
 
-struct Node {
-    int data;
-    struct Node *next;
-};
-
-typedef struct Node *node;
-
-node createNode() {
+node createNode7() {
     node temp = (node)malloc(sizeof(struct Node));
     temp->data = rand() % 100;
     temp->next = NULL;
     return temp;
 }
 
-node pushBack(node head) {
+node pushBack7(node head) {
     node temp, ptr;
-    temp = createNode();
+    temp = createNode7();
     if (head == NULL) {
         head = temp;
     } else {
@@ -33,7 +24,7 @@ node pushBack(node head) {
 
 node addPosition(node head, unsigned int position) {
     node ptr = head;
-    node temp = createNode();
+    node temp = createNode7();
     if (position == 0) {
         temp->next = head;
         head = temp;
@@ -64,35 +55,29 @@ node mission(node head) {
         }
         i++;
     }
-    //printf("\n");
     return head;
 }
 
-void display(node head) {
+void display7(node head) {
     node ptr = head;
-    int i = 0;
     for (ptr; ptr != NULL; ptr = ptr->next) {
         printf("%d ", (ptr->data));
-        i++;
     }
     printf("\n");
 }
 
-int main() {
+void bai7() {
     node head = NULL;
     unsigned int size;
-    srand((int)time(0));
     printf("Enter size: ");
     scanf("%d", &size);
     for (int i = 0; i < size; i++) {
-        head = pushBack(head);
+        head = pushBack7(head);
     }
-    display(head);
+    display7(head);
     mission(head);
-    //addPosition(head, 5);
-    display(head);
+    display7(head);
     for (node ptr = head; ptr != NULL; ptr = ptr->next) {
         free(ptr);
     }
-    return 0;
 }

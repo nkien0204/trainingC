@@ -1,15 +1,8 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<time.h>
+#include"proj.h"
 
-void inputMatrix(int ***matrix, unsigned int N);
-void exportFile(FILE **ptr, char *destination, char *mode, int **content, unsigned int row, unsigned int column);
-void maxMin(int ***matrixNew, unsigned int N);
-
-int main(){
+void bai4(){
     FILE *fptr = NULL;
     int N;
-    srand((int)time(0));
     printf("Enter N: ");
     scanf("%d", &N);
     int **matrix;
@@ -17,9 +10,9 @@ int main(){
     
     inputMatrix(&matrix, N);
 
-    exportFile(&fptr, "/home/kn/vsCode/trainingC/bai4.txt", "w", matrix, N, N);
+    exportFile(&fptr, "/home/kn/vsCodeWS/trainingC/bai4.txt", "w", matrix, N, N);
 
-    fptr = fopen("/home/kn/vsCode/trainingC/bai4.txt", "a");
+    fptr = fopen("/home/kn/vsCodeWS/trainingC/bai4.txt", "a");
     fprintf(fptr, "%s", "\n\n");
     fclose(fptr);
 
@@ -30,14 +23,12 @@ int main(){
 
     maxMin(&matrix, N);
 
-    exportFile(&fptr, "/home/kn/vsCode/trainingC/bai4.txt", "a", matrix, N + 2, N);
+    exportFile(&fptr, "/home/kn/vsCodeWS/trainingC/bai4.txt", "a", matrix, N + 2, N);
 
     for (int i = 0; i < N + 2; i++) {
         free(matrix[i]);
     }
     free(matrix);
-
-    return 0;
 }
 
 void inputMatrix(int ***matrix, unsigned int N) {
