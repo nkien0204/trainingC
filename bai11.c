@@ -1,6 +1,6 @@
 #include"proj.h"
 #include<regex.h>
-#include <dirent.h> 
+#include<dirent.h> 
 
 void Find();
 void Regex(char *r_target, char *fileName);
