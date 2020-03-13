@@ -3,7 +3,7 @@
 #include<dirent.h> 
 
 void Find();
-void Regex(char *r_target, char *fileName);
+void Regex(char *r_target, char *fName);
 
 int main() {  
     Find();
@@ -24,7 +24,7 @@ void Find() {
     //point dir to folder
     DIR *dir = opendir(directory);
     if (dir == NULL) { 
-        printf("Could not open current directory" ); 
+        printf("Could not open current directory"); 
         return; 
     }
     printf("Result: \n");
@@ -47,6 +47,7 @@ void Regex(char r_target[], char *fName) {
     }
     reti = regexec(&regex, fName, 0, NULL, 0);
     if (!reti) {
-         printf("%s\n", fName);
+        printf("%s\n", fName);
     }
+    regfree(&regex);
 }
